@@ -4,7 +4,7 @@ app.controller('markovCtrl', function($scope, $http, $window) {
 	$scope.quote = false
 	$scope.processing = false
 	$scope.score = 0
-	$window.document.title = "Savage"
+	$window.document.title = "Markov Chain Project"
 	$scope.author = "Aristotle"
 	$scope.authorNames = {
 		"ARISTOTLE": "Aristotle",
@@ -35,7 +35,7 @@ app.controller('markovCtrl', function($scope, $http, $window) {
 			$scope.processing = true
 			$http.get('/sentences/' + authorName)
 				.success(function(res) {
-					$window.document.title = "Savage"
+					$window.document.title = "Markov Chain Project"
 					$scope.processing = false
 					if (res.sentence != "Couldn't find author.") {
 						console.log(res.sentences)
