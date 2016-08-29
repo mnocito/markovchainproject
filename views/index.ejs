@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> 
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+	<style>
+		img {
+			display: inline-block;
+			max-height: 30em;
+			width: auto;
+			height: auto;
+		}
+		.question {
+			text-align: center; font-family: 'Raleway', sans-serif; 
+			font-size: 2.5em; 
+			font-weight: lighter; 
+			display: block; 
+			margin-bottom: 1%; 
+			border-radius: 1em; 
+			border: .05em solid; 
+			padding-left: 1em; 
+			padding-right: 1em;
+		}
+		.question:hover {
+			background-color: #FF9999;
+			color: white;
+			cursor: pointer;
+		}
+		span.oneup {
+			opacity: 0;
+		}
+		span.ng-enter {
+  			transition:1s linear all;
+  			opacity: 1;
+  			top: 50px;
+		}
+		span.ng-enter.ng-enter-active {
+  			opacity: 0;
+  			top: 0px;
+		}
+	</style>
+	<!-- angular libraries -->
+	
+	<title>Savage</title>
+</head>
+<body ng-app="markov" ng-controller="markovCtrl" ng-cloak>
+	<div class="container" style="padding-top: 1%;">
+		<!--  -->
+		<div class="row" style="text-align: center; padding-bottom: 1%; font-family: 'Raleway', sans-serif; font-size: 1.5em;" class="input-group">
+			Markov chains are things.
+		</div>
+		<div class="row" style="text-align: center; padding-bottom: 1%; font-family: 'Raleway', sans-serif; font-size: 1.5em;" class="input-group">
+			Score: {{score}}/{{totalRounds}} <span class="oneup" style="position: absolute" ng-if="oneup">+1</span>
+		</div>
+		<div class="row" class="input-group">
+			<select class="selectpicker form-control" class="btn-success" title="Choose an author..." ng-options="author for author in authorNames" ng-model="author" ng-change="log(author)" ng-hide="processing" style="text-align-last: center; text-align: center; font-family: 'Raleway', sans-serif; font-size: 1.5em;">
+			</select>
+			<div style="text-align: center; padding-top: 1%;" layout="row" layout-sm="column" layout-align="space-around">
+				<md-button ng-hide="processing" class="md-primary md-raised" ng-click="loadauthor()" >Create markov sentence</md-button>
+			</div>
+		</div>
+		<div style="text-align: center; font-family: 'Raleway', sans-serif; font-size: 1.5em;" ng-show="processing">
+			<md-progress-circular md-mode="indeterminate" class="md-warn"  	md-diameter="100" style="text-align: center; margin-left: auto; margin-right: auto;"></md-progress-circular>
+			<b>Loading...</b>
+		</div>
+		<div class="row" style="text-align: center; padding-bottom: 1%; font-family: 'Raleway', sans-serif; font-size: 1.5em;" class="input-group" ng-show="quote">
+			Which one of these is a real {{author}} quote?
+		</div>
+		<div class="question"  ng-show="quote" ng-click="changeScore(option1.quote)">
+			{{option1.text}}
+		</div>
+		<div class="question"  ng-show="quote" ng-click="changeScore(option2.quote)">
+			{{option2.text}}
+		</div>
+		<div style="text-align: center; font-family: 'Raleway', sans-serif;  font-weight: bold;"  ng-show="quote">
+			<img ng-src="{{authorPhoto}}" alt="">
+		</div>
+	</div>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+	<!-- Angular Material Library -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+	<script src="/javascripts/markovCtrl.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</body>
+</html>
